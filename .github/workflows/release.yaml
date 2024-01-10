@@ -1,0 +1,23 @@
+name: "Release"
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    name: Release
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.work
+
+      - run: go run mage release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

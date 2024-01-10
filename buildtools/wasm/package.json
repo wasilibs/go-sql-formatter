@@ -1,0 +1,20 @@
+{
+  "name": "wasm",
+  "version": "15.0.2",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild --external:std --bundle sql-formatter-cli.ts --format=esm --outfile=dist/sql-formatter-cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@8.14.0",
+  "devDependencies": {
+    "@types/quickjs": "github:Gottox/quickjs-dts",
+    "esbuild": "^0.19.11",
+    "prettier": "^3.1.1",
+    "sql-formatter": "15.0.2",
+    "typescript": "^5.3.3"
+  }
+}
