@@ -6,13 +6,14 @@ import {
   supportedDialects,
 } from "sql-formatter";
 
+import { version } from "./package.json";
+
 interface Args {
   fix?: boolean;
   language: string;
   file?: string;
   output?: string;
   config?: string;
-  version?: boolean;
 }
 
 class SqlFormatterCli {
@@ -98,8 +99,8 @@ class SqlFormatterCli {
         continue;
       }
       if (arg === "--version") {
-        args.version = true;
-        continue;
+        console.log(version);
+        exit(0);
       }
       args.file = arg;
     }
@@ -140,7 +141,11 @@ class SqlFormatterCli {
     // a non-interactive execution will differ when no flags are provided, upstream would normally
     // default to reading and writing to stdin/stdout. Such usage should be rare in practice
     // and it is more important to display the help text when no args are passed.
-    if (Object.entries(this.args).every(([k, v]) => k === 'language' || v === undefined)) {
+    if (
+      Object.entries(this.args).every(
+        ([k, v]) => k === "language" || v === undefined,
+      )
+    ) {
       this.printHelp();
       exit(0);
     }
