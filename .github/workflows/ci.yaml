@@ -15,7 +15,8 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - macos-12
+          - macos-13
+          - macos-14
           - ubuntu-22.04
           - windows-2022
     steps:
@@ -26,9 +27,11 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.work
+          cache-dependency-path: "**/go.sum"
 
       - name: run checks
-        run: go run mage check
+        run: go run build check
 
       - name: build snapshot
-        run: go run mage snapshot
+        if: startsWith(matrix.os, 'ubuntu-')
+        run: go run build snapshot
