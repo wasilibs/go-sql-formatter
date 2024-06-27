@@ -16,8 +16,8 @@ github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d/go.mod h1:01TrycV0kFyex
 github.com/microcosm-cc/bluemonday v1.0.26/go.mod h1:JyzOCs9gkyQyjs+6h10UEVSe02CGwkhd72Xdqh78TWs=
 github.com/muesli/reflow v0.3.0/go.mod h1:pbwTDkVPibjO2kyvBQRBxTWEEGDGq0FlB1BIKtnHY/8=
 github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
-github.com/tetratelabs/wazero v1.7.1 h1:QtSfd6KLc41DIMpDYlJdoMc6k7QTN246DM2+n2Y/Dx8=
 github.com/tetratelabs/wazero v1.7.1/go.mod h1:ytl6Zuh20R/eROuyDaGPkp82O9C/DJfXAwJfQ3X6/7Y=
+github.com/wasilibs/go-protoc-gen-builtins v1.26.1/go.mod h1:rKeiNH+6pzq6ljgp1tZKMLE0ZFFleOA+R74IIAzqbIc=
 github.com/wasilibs/tools v0.0.0-20240501081123-9453b4e4849b h1:01NaIAM/YZen99AprgqqUtx1f+QQQ2OJltvRU/tSyIM=
 github.com/wasilibs/tools v0.0.0-20240501081123-9453b4e4849b/go.mod h1:a5m8nZcIrTNevHVB0f0M5hzb/Rd6dHpuRWNWMVRi3q0=
 github.com/yuin/goldmark v1.5.4/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=

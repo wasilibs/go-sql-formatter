@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build": "esbuild --external:std --bundle sql-formatter-cli.ts --format=esm --outfile=dist/sql-formatter-cli.js"
+    "build": "mkdir -p dist && esbuild --external:std --bundle sql-formatter-cli.ts --format=esm | node hoist-imports.mjs > dist/sql-formatter-cli.js"
   },
   "keywords": [],
   "author": "",

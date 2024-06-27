@@ -29,7 +29,7 @@ func TestHelp(t *testing.T) {
 	stdout := bytes.Buffer{}
 	stderr := bytes.Buffer{}
 
-	ret := runner.Run("sql-formatter-cli", []string{"--help"}, wasm.SqlFormatterCLI, &stdin, &stdout, &stderr, ".")
+	ret := runner.Run("sql-formatter-cli", []string{"--help"}, wasm.SQLFormatterCLI, &stdin, &stdout, &stderr, ".")
 	if ret != 0 {
 		t.Errorf("expected 0, got %d", ret)
 	}
@@ -102,7 +102,7 @@ func TestFormat(t *testing.T) {
 			stderr := bytes.Buffer{}
 			ret := runner.Run("sql-formatter-cli",
 				tc.args,
-				wasm.SqlFormatterCLI, &stdin, &stdout, &stderr, dir)
+				wasm.SQLFormatterCLI, &stdin, &stdout, &stderr, dir)
 			if ret != 0 {
 				t.Errorf("expected 0, got %d", ret)
 			}
