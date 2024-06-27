@@ -4,7 +4,7 @@ go 1.22
 
 require (
 	github.com/goyek/x v0.1.7
-	github.com/wasilibs/tools v0.0.0-20240501081123-9453b4e4849b
+	github.com/wasilibs/tools v0.0.0-20240627054647-1aadfa8fce7f
 )
 
 require (
@@ -12,6 +12,7 @@ require (
 	github.com/cli/go-gh/v2 v2.9.0 // indirect
 	github.com/cli/safeexec v1.0.0 // indirect
 	github.com/cli/shurcooL-graphql v0.0.4 // indirect
+	github.com/curioswitch/go-build v0.0.0-20240606064955-be261ad22091 // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/google/go-github v17.0.0+incompatible // indirect
 	github.com/google/go-querystring v1.1.0 // indirect

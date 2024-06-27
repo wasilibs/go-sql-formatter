@@ -8,5 +8,5 @@ import (
 )
 
 func main() {
-	os.Exit(runner.Run("sql-formatter-cli", os.Args[1:], wasm.SqlFormatterCLI, os.Stdin, os.Stdout, os.Stderr, "."))
+	os.Exit(runner.Run("sql-formatter-cli", os.Args[1:], wasm.SQLFormatterCLI, os.Stdin, os.Stdout, os.Stderr, "."))
 }

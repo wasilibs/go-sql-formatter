@@ -42,7 +42,7 @@ func Run(name string, args []string, wasm []byte, stdin io.Reader, stdout io.Wri
 
 	_, err := rt.InstantiateWithConfig(ctx, wasm, cfg)
 	if err != nil {
-		if sErr, ok := err.(*sys.ExitError); ok {
+		if sErr, ok := err.(*sys.ExitError); ok { //nolint:errorlint
 			return int(sErr.ExitCode())
 		}
 		log.Fatal(err)
