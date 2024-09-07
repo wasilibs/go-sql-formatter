@@ -15,8 +15,8 @@ devDependencies:
     specifier: ^3.3.3
     version: 3.3.3
   sql-formatter:
-    specifier: 15.4.1
-    version: 15.4.1
+    specifier: 15.4.2
+    version: 15.4.2
   typescript:
     specifier: ^5.5.4
     version: 5.5.4
@@ -325,8 +325,8 @@ packages:
     engines: {node: '>=0.12'}
     dev: true
 
-  /sql-formatter@15.4.1:
-    resolution: {integrity: sha512-lw/G/emIJ+tVspOtOFzfD2YFFMN3MFPxGnbWl1DlJLB+fsX7X7zMqSRM1SLSn2YuaRJ0lTe7AMknHDqmIW1Y8w==}
+  /sql-formatter@15.4.2:
+    resolution: {integrity: sha512-Pw4aAgfuyml/SHMlhbJhyOv+GR+Z1HNb9sgX3CVBVdN5YNM+v2VWkYJ3NNbYS7cu37GY3vP/PgnwoVynCuXRxg==}
     hasBin: true
     dependencies:
       argparse: 2.0.1
