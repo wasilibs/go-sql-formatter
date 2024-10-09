@@ -12,9 +12,9 @@
   "packageManager": "pnpm@8.14.0",
   "devDependencies": {
     "@types/quickjs": "github:Gottox/quickjs-dts",
-    "esbuild": "^0.23.1",
+    "esbuild": "^0.24.0",
     "prettier": "^3.3.3",
-    "sql-formatter": "15.4.2",
-    "typescript": "^5.5.4"
+    "sql-formatter": "15.4.3",
+    "typescript": "^5.6.3"
   }
 }
