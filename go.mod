@@ -1,4 +1,4 @@
-module github.com/wasilibs/go-sql-formatter
+module github.com/wasilibs/go-sql-formatter/v15
 
 go 1.22
 
