@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/wasilibs/go-sql-formatter/internal/runner"
-	"github.com/wasilibs/go-sql-formatter/internal/wasm"
+	"github.com/wasilibs/go-sql-formatter/v15/internal/runner"
+	"github.com/wasilibs/go-sql-formatter/v15/internal/wasm"
 )
 
 //go:embed testdata/formatted.sql
