@@ -1,27 +1,28 @@
 diff --git a/Makefile b/Makefile
-index cf88a72..2cd2718 100644
+index 9b003f0..6e93e7f 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -66,11 +66,6 @@ ifdef CONFIG_UBSAN
- OBJDIR:=$(OBJDIR)/ubsan
- endif
+@@ -34,12 +34,6 @@ CONFIG_LTO=y
+ # force 32 bit build for some utilities
+ #CONFIG_M32=y
  
 -ifdef CONFIG_DARWIN
 -# use clang instead of gcc
 -CONFIG_CLANG=y
 -CONFIG_DEFAULT_AR=y
 -endif
- ifdef CONFIG_FREEBSD
- # use clang instead of gcc
- CONFIG_CLANG=y
-@@ -121,15 +116,9 @@ else ifdef CONFIG_COSMO
-   CFLAGS += -Wno-array-bounds -Wno-format-truncation
-   AR=cosmoar
+-
+ # installation directory
+ prefix=/usr/local
+ 
+@@ -85,15 +79,9 @@ ifdef CONFIG_CLANG
+     endif
+   endif
  else
 -  HOST_CC=gcc
 -  CC=$(CROSS_PREFIX)gcc
 +  HOST_CC=$(CC)
-   CFLAGS+=-g -Wall -MMD -MF $(OBJDIR)/$(@F).d
+   CFLAGS=-g -Wall -MMD -MF $(OBJDIR)/$(@F).d
    CFLAGS += -Wno-array-bounds -Wno-format-truncation
 -  ifdef CONFIG_LTO
 -    AR=$(CROSS_PREFIX)gcc-ar
@@ -29,9 +30,9 @@ index cf88a72..2cd2718 100644
 -    AR=$(CROSS_PREFIX)ar
 -  endif
  endif
- STRIP?=$(CROSS_PREFIX)strip
+ STRIP=$(CROSS_PREFIX)strip
  CFLAGS+=-fwrapv # ensure that signed overflows behave as expected
-@@ -150,6 +139,7 @@ endif
+@@ -109,6 +97,7 @@ DEFINES+=-D__USE_MINGW_ANSI_STDIO # for standard snprintf behavior
  endif
  
  CFLAGS+=$(DEFINES)
@@ -40,7 +41,7 @@ index cf88a72..2cd2718 100644
  CFLAGS_SMALL=$(CFLAGS) -Os
  CFLAGS_OPT=$(CFLAGS) -O2
 diff --git a/qjsc.c b/qjsc.c
-index 46f52a6..ec98f05 100644
+index f8e60b3..f77f2f0 100644
 --- a/qjsc.c
 +++ b/qjsc.c
 @@ -29,7 +29,7 @@
@@ -62,7 +63,7 @@ index 46f52a6..ec98f05 100644
  int exec_cmd(char **argv)
  {
 diff --git a/quickjs-libc.c b/quickjs-libc.c
-index 8137150..d59dbb5 100644
+index ea73ee8..5db9460 100644
 --- a/quickjs-libc.c
 +++ b/quickjs-libc.c
 @@ -42,10 +42,12 @@
@@ -77,9 +78,9 @@ index 8137150..d59dbb5 100644
 +#endif
 +#include <sys/ioctl.h>
  
- #if defined(__FreeBSD__)
- extern char **environ;
-@@ -64,7 +66,7 @@ typedef sig_t sighandler_t;
+ #if defined(__APPLE__)
+ typedef sig_t sighandler_t;
+@@ -57,7 +59,7 @@ typedef sig_t sighandler_t;
  
  #endif
  
@@ -88,7 +89,7 @@ index 8137150..d59dbb5 100644
  /* enable the os.Worker API. IT relies on POSIX threads */
  #define USE_WORKER
  #endif
-@@ -462,7 +464,7 @@ typedef JSModuleDef *(JSInitModuleFunc)(JSContext *ctx,
+@@ -453,7 +455,7 @@ typedef JSModuleDef *(JSInitModuleFunc)(JSContext *ctx,
                                          const char *module_name);
  
  
@@ -97,7 +98,7 @@ index 8137150..d59dbb5 100644
  static JSModuleDef *js_module_loader_so(JSContext *ctx,
                                          const char *module_name)
  {
-@@ -539,7 +541,7 @@ int js_module_set_import_meta(JSContext *ctx, JSValueConst func_val,
+@@ -530,7 +532,7 @@ int js_module_set_import_meta(JSContext *ctx, JSValueConst func_val,
          return -1;
      if (!strchr(module_name, ':')) {
          strcpy(buf, "file://");
@@ -106,7 +107,7 @@ index 8137150..d59dbb5 100644
          /* realpath() cannot be used with modules compiled with qjsc
             because the corresponding module source code is not
             necessarily present */
-@@ -812,9 +814,11 @@ static void js_std_file_finalizer(JSRuntime *rt, JSValue val)
+@@ -803,9 +805,11 @@ static void js_std_file_finalizer(JSRuntime *rt, JSValue val)
      JSSTDFile *s = JS_GetOpaque(val, js_std_file_class_id);
      if (s) {
          if (s->f && s->close_in_finalizer) {
@@ -118,7 +119,7 @@ index 8137150..d59dbb5 100644
                  fclose(s->f);
          }
          js_free_rt(rt, s);
-@@ -919,6 +923,7 @@ static JSValue js_std_open(JSContext *ctx, JSValueConst this_val,
+@@ -910,6 +914,7 @@ static JSValue js_std_open(JSContext *ctx, JSValueConst this_val,
  static JSValue js_std_popen(JSContext *ctx, JSValueConst this_val,
                              int argc, JSValueConst *argv)
  {
@@ -126,7 +127,7 @@ index 8137150..d59dbb5 100644
      const char *filename, *mode = NULL;
      FILE *f;
      int err;
-@@ -949,6 +954,7 @@ static JSValue js_std_popen(JSContext *ctx, JSValueConst this_val,
+@@ -940,6 +945,7 @@ static JSValue js_std_popen(JSContext *ctx, JSValueConst this_val,
   fail:
      JS_FreeCString(ctx, filename);
      JS_FreeCString(ctx, mode);
@@ -134,7 +135,7 @@ index 8137150..d59dbb5 100644
      return JS_EXCEPTION;
  }
  
-@@ -985,6 +991,7 @@ static JSValue js_std_fdopen(JSContext *ctx, JSValueConst this_val,
+@@ -976,6 +982,7 @@ static JSValue js_std_fdopen(JSContext *ctx, JSValueConst this_val,
      return JS_EXCEPTION;
  }
  
@@ -142,7 +143,7 @@ index 8137150..d59dbb5 100644
  static JSValue js_std_tmpfile(JSContext *ctx, JSValueConst this_val,
                                int argc, JSValueConst *argv)
  {
-@@ -996,6 +1003,7 @@ static JSValue js_std_tmpfile(JSContext *ctx, JSValueConst this_val,
+@@ -987,6 +994,7 @@ static JSValue js_std_tmpfile(JSContext *ctx, JSValueConst this_val,
          return JS_NULL;
      return js_new_std_file(ctx, f, TRUE, FALSE);
  }
@@ -150,7 +151,7 @@ index 8137150..d59dbb5 100644
  
  static JSValue js_std_sprintf(JSContext *ctx, JSValueConst this_val,
                            int argc, JSValueConst *argv)
-@@ -1056,9 +1064,11 @@ static JSValue js_std_file_close(JSContext *ctx, JSValueConst this_val,
+@@ -1047,9 +1055,11 @@ static JSValue js_std_file_close(JSContext *ctx, JSValueConst this_val,
          return JS_EXCEPTION;
      if (!s->f)
          return JS_ThrowTypeError(ctx, "invalid file handle");
@@ -162,15 +163,15 @@ index 8137150..d59dbb5 100644
          err = js_get_errno(fclose(s->f));
      s->f = NULL;
      return JS_NewInt32(ctx, err);
-@@ -1288,6 +1298,7 @@ static JSValue js_std_file_putByte(JSContext *ctx, JSValueConst this_val,
+@@ -1279,6 +1289,7 @@ static JSValue js_std_file_putByte(JSContext *ctx, JSValueConst this_val,
  }
  
  /* urlGet */
 +#if !defined(__wasi__)
  
- #define URL_GET_PROGRAM "curl -s -i --"
+ #define URL_GET_PROGRAM "curl -s -i"
  #define URL_GET_BUF_SIZE 4096
-@@ -1481,6 +1492,7 @@ static JSValue js_std_urlGet(JSContext *ctx, JSValueConst this_val,
+@@ -1463,6 +1474,7 @@ static JSValue js_std_urlGet(JSContext *ctx, JSValueConst this_val,
      JS_FreeValue(ctx, response);
      return JS_EXCEPTION;
  }
@@ -178,7 +179,7 @@ index 8137150..d59dbb5 100644
  
  static JSClassDef js_std_file_class = {
      "FILE",
-@@ -1513,7 +1525,9 @@ static const JSCFunctionListEntry js_std_funcs[] = {
+@@ -1495,7 +1507,9 @@ static const JSCFunctionListEntry js_std_funcs[] = {
      JS_CFUNC_DEF("setenv", 1, js_std_setenv ),
      JS_CFUNC_DEF("unsetenv", 1, js_std_unsetenv ),
      JS_CFUNC_DEF("getenviron", 1, js_std_getenviron ),
@@ -188,7 +189,7 @@ index 8137150..d59dbb5 100644
      JS_CFUNC_DEF("loadFile", 1, js_std_loadFile ),
      JS_CFUNC_DEF("strerror", 1, js_std_strerror ),
      JS_CFUNC_DEF("parseExtJSON", 1, js_std_parseExtJSON ),
-@@ -1522,7 +1536,9 @@ static const JSCFunctionListEntry js_std_funcs[] = {
+@@ -1504,7 +1518,9 @@ static const JSCFunctionListEntry js_std_funcs[] = {
      JS_CFUNC_DEF("open", 2, js_std_open ),
      JS_CFUNC_DEF("popen", 2, js_std_popen ),
      JS_CFUNC_DEF("fdopen", 2, js_std_fdopen ),
@@ -198,7 +199,7 @@ index 8137150..d59dbb5 100644
      JS_CFUNC_MAGIC_DEF("puts", 1, js_std_file_puts, 0 ),
      JS_CFUNC_DEF("printf", 1, js_std_printf ),
      JS_CFUNC_DEF("sprintf", 1, js_std_sprintf ),
-@@ -1738,6 +1754,7 @@ static JSValue js_os_ttySetRaw(JSContext *ctx, JSValueConst this_val,
+@@ -1720,6 +1736,7 @@ static JSValue js_os_ttySetRaw(JSContext *ctx, JSValueConst this_val,
  static JSValue js_os_ttyGetWinSize(JSContext *ctx, JSValueConst this_val,
                                     int argc, JSValueConst *argv)
  {
@@ -206,7 +207,7 @@ index 8137150..d59dbb5 100644
      int fd;
      struct winsize ws;
      JSValue obj;
-@@ -1755,19 +1772,27 @@ static JSValue js_os_ttyGetWinSize(JSContext *ctx, JSValueConst this_val,
+@@ -1737,19 +1754,27 @@ static JSValue js_os_ttyGetWinSize(JSContext *ctx, JSValueConst this_val,
      } else {
          return JS_NULL;
      }
@@ -233,8 +234,8 @@ index 8137150..d59dbb5 100644
 +#ifndef __wasi__
      struct termios tty;
      int fd;
- 
-@@ -1790,6 +1815,7 @@ static JSValue js_os_ttySetRaw(JSContext *ctx, JSValueConst this_val,
+     
+@@ -1772,6 +1797,7 @@ static JSValue js_os_ttySetRaw(JSContext *ctx, JSValueConst this_val,
      tcsetattr(fd, TCSANOW, &tty);
  
      atexit(term_exit);
@@ -242,7 +243,7 @@ index 8137150..d59dbb5 100644
      return JS_UNDEFINED;
  }
  
-@@ -2711,6 +2737,7 @@ static char *realpath(const char *path, char *buf)
+@@ -2712,6 +2738,7 @@ static char *realpath(const char *path, char *buf)
  static JSValue js_os_realpath(JSContext *ctx, JSValueConst this_val,
                                int argc, JSValueConst *argv)
  {
@@ -250,7 +251,7 @@ index 8137150..d59dbb5 100644
      const char *path;
      char buf[PATH_MAX], *res;
      int err;
-@@ -2727,6 +2754,8 @@ static JSValue js_os_realpath(JSContext *ctx, JSValueConst this_val,
+@@ -2728,6 +2755,8 @@ static JSValue js_os_realpath(JSContext *ctx, JSValueConst this_val,
          err = 0;
      }
      return make_string_error(ctx, buf, err);
@@ -259,7 +260,7 @@ index 8137150..d59dbb5 100644
  }
  
  #if !defined(_WIN32)
-@@ -2833,6 +2862,7 @@ static char **build_envp(JSContext *ctx, JSValueConst obj)
+@@ -2834,6 +2863,7 @@ static char **build_envp(JSContext *ctx, JSValueConst obj)
      goto done;
  }
  
@@ -267,7 +268,7 @@ index 8137150..d59dbb5 100644
  /* execvpe is not available on non GNU systems */
  static int my_execvpe(const char *filename, char **argv, char **envp)
  {
-@@ -2888,11 +2918,13 @@ static int my_execvpe(const char *filename, char **argv, char **envp)
+@@ -2889,11 +2919,13 @@ static int my_execvpe(const char *filename, char **argv, char **envp)
          errno = EACCES;
      return -1;
  }
@@ -281,7 +282,7 @@ index 8137150..d59dbb5 100644
      JSValueConst options, args = argv[0];
      JSValue val, ret_val;
      const char **exec_argv, *file = NULL, *str, *cwd = NULL;
-@@ -3103,6 +3135,8 @@ static JSValue js_os_exec(JSContext *ctx, JSValueConst this_val,
+@@ -3086,12 +3118,15 @@ static JSValue js_os_exec(JSContext *ctx, JSValueConst this_val,
   exception:
      ret_val = JS_EXCEPTION;
      goto done;
@@ -289,22 +290,21 @@ index 8137150..d59dbb5 100644
 +    return JS_EXCEPTION;
  }
  
- /* getpid() -> pid */
-@@ -3116,6 +3150,7 @@ static JSValue js_os_getpid(JSContext *ctx, JSValueConst this_val,
+ /* waitpid(pid, block) -> [pid, status] */
  static JSValue js_os_waitpid(JSContext *ctx, JSValueConst this_val,
                               int argc, JSValueConst *argv)
  {
 +#if !defined(__wasi__)
      int pid, status, options, ret;
      JSValue obj;
- 
-@@ -3138,12 +3173,15 @@ static JSValue js_os_waitpid(JSContext *ctx, JSValueConst this_val,
+     
+@@ -3114,12 +3149,15 @@ static JSValue js_os_waitpid(JSContext *ctx, JSValueConst this_val,
      JS_DefinePropertyValueUint32(ctx, obj, 1, JS_NewInt32(ctx, status),
                                   JS_PROP_C_W_E);
      return obj;
 +#endif
 +    return JS_EXCEPTION;
- }
+ }    
  
  /* pipe() -> [read_fd, write_fd] or null if error */
  static JSValue js_os_pipe(JSContext *ctx, JSValueConst this_val,
@@ -313,8 +313,8 @@ index 8137150..d59dbb5 100644
 +#if !defined(__wasi__)
      int pipe_fds[2], ret;
      JSValue obj;
- 
-@@ -3158,12 +3196,15 @@ static JSValue js_os_pipe(JSContext *ctx, JSValueConst this_val,
+     
+@@ -3134,12 +3172,15 @@ static JSValue js_os_pipe(JSContext *ctx, JSValueConst this_val,
      JS_DefinePropertyValueUint32(ctx, obj, 1, JS_NewInt32(ctx, pipe_fds[1]),
                                   JS_PROP_C_W_E);
      return obj;
@@ -328,9 +328,9 @@ index 8137150..d59dbb5 100644
  {
 +#if !defined(__wasi__)
      int pid, sig, ret;
- 
+     
      if (JS_ToInt32(ctx, &pid, argv[0]))
-@@ -3172,24 +3213,30 @@ static JSValue js_os_kill(JSContext *ctx, JSValueConst this_val,
+@@ -3148,24 +3189,30 @@ static JSValue js_os_kill(JSContext *ctx, JSValueConst this_val,
          return JS_EXCEPTION;
      ret = js_get_errno(kill(pid, sig));
      return JS_NewInt32(ctx, ret);
@@ -344,7 +344,7 @@ index 8137150..d59dbb5 100644
  {
 +#if !defined(__wasi__)
      int fd, ret;
- 
+     
      if (JS_ToInt32(ctx, &fd, argv[0]))
          return JS_EXCEPTION;
      ret = js_get_errno(dup(fd));
@@ -359,9 +359,9 @@ index 8137150..d59dbb5 100644
  {
 +#if !defined(__wasi__)
      int fd, fd2, ret;
- 
+     
      if (JS_ToInt32(ctx, &fd, argv[0]))
-@@ -3198,6 +3245,8 @@ static JSValue js_os_dup2(JSContext *ctx, JSValueConst this_val,
+@@ -3174,6 +3221,8 @@ static JSValue js_os_dup2(JSContext *ctx, JSValueConst this_val,
          return JS_EXCEPTION;
      ret = js_get_errno(dup2(fd, fd2));
      return JS_NewInt32(ctx, ret);
@@ -370,9 +370,9 @@ index 8137150..d59dbb5 100644
  }
  
  #endif /* !_WIN32 */
-@@ -3742,7 +3791,9 @@ static const JSCFunctionListEntry js_os_funcs[] = {
+@@ -3715,7 +3764,9 @@ static const JSCFunctionListEntry js_os_funcs[] = {
+     JS_CFUNC_DEF("readlink", 1, js_os_readlink ),
      JS_CFUNC_DEF("exec", 1, js_os_exec ),
-     JS_CFUNC_DEF("getpid", 0, js_os_getpid ),
      JS_CFUNC_DEF("waitpid", 2, js_os_waitpid ),
 +#if !defined(__wasi__)
      OS_FLAG(WNOHANG),
@@ -381,10 +381,10 @@ index 8137150..d59dbb5 100644
      JS_CFUNC_DEF("kill", 2, js_os_kill ),
      JS_CFUNC_DEF("dup", 1, js_os_dup ),
 diff --git a/quickjs.c b/quickjs.c
-index f000ff7..2ddb158 100644
+index a6cab1d..45ad79a 100644
 --- a/quickjs.c
 +++ b/quickjs.c
-@@ -61,7 +61,7 @@
+@@ -60,7 +60,7 @@
  #define MALLOC_OVERHEAD  8
  #endif
  
@@ -393,11 +393,3 @@ index f000ff7..2ddb158 100644
  /* define it if printf uses the RNDN rounding mode instead of RNDNA */
  #define CONFIG_PRINTF_RNDN
  #endif
-@@ -6465,6 +6465,7 @@ static int get_sleb128(int32_t *pval, const uint8_t *buf,
- static int find_line_num(JSContext *ctx, JSFunctionBytecode *b,
-                          uint32_t pc_value)
- {
-+    return -1;
-     const uint8_t *p_end, *p;
-     int new_line_num, line_num, pc, v, ret;
-     unsigned int op;
