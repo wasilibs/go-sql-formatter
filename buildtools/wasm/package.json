@@ -4,17 +4,19 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build": "mkdir -p dist && esbuild --external:std --bundle sql-formatter-cli.ts --format=esm | node hoist-imports.mjs > dist/sql-formatter-cli.js"
+    "build": "mkdir -p dist && bun build --external std sql-formatter-cli.ts | bun run hoist-imports.ts > dist/sql-formatter-cli.js"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "packageManager": "pnpm@8.14.0",
+  "packageManager": "bun@1.2.2",
+  "dependencies": {
+    "sql-formatter": "15.4.9"
+  },
   "devDependencies": {
     "@types/quickjs": "github:Gottox/quickjs-dts",
-    "esbuild": "^0.24.2",
+    "@types/node": "^22.13.1",
     "prettier": "^3.4.2",
-    "sql-formatter": "15.4.10",
     "typescript": "^5.7.3"
   }
 }
