@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    uses: wasilibs/actions/.github/workflows/update-node.yaml@d544cfa1f0efe329ff95b2be38dc9ebbd08b6b83
+    uses: wasilibs/actions/.github/workflows/update-node.yaml@4d0b8fa8bff38a4fe920d56b35ea947625a778db
     with:
       packages: sql-formatter
     secrets: inherit
