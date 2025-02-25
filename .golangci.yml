@@ -25,7 +25,7 @@ linters-settings:
     sections:
       - standard
       - default
-      - prefix(github.com/wasilibs/go-protoc-gen-builtins)
+      - prefix(github.com/wasilibs/go-sql-formatter)
   gosec:
     config:
       G306: "0644"
