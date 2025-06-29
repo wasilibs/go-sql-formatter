@@ -11,12 +11,12 @@
   "license": "MIT",
   "packageManager": "bun@1.2.2",
   "dependencies": {
-    "sql-formatter": "15.6.5"
+    "sql-formatter": "15.6.6"
   },
   "devDependencies": {
     "@types/quickjs": "github:Gottox/quickjs-dts",
-    "@types/node": "^24.0.3",
-    "prettier": "^3.5.3",
+    "@types/node": "^24.0.7",
+    "prettier": "^3.6.2",
     "typescript": "^5.8.3"
   }
 }
