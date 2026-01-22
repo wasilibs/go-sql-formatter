@@ -84,7 +84,6 @@ func TestFormat(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		tc := tc
 		t.Run(strings.Join(tc.args, " "), func(t *testing.T) {
 			dir := t.TempDir()
 			unformattedSQLPath := filepath.Join(dir, "unformatted.sql")
