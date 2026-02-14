@@ -4,10 +4,10 @@
     "": {
       "name": "wasm",
       "dependencies": {
-        "sql-formatter": "15.7.0",
+        "sql-formatter": "15.7.1",
       },
       "devDependencies": {
-        "@types/node": "^25.0.10",
+        "@types/node": "^25.2.3",
         "@types/quickjs": "github:Gottox/quickjs-dts",
         "prettier": "^3.8.1",
         "typescript": "^5.9.3",
@@ -15,7 +15,7 @@
     },
   },
   "packages": {
-    "@types/node": ["@types/node@25.0.10", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-zWW5KPngR/yvakJgGOmZ5vTBemDoSqF3AcV/LrO5u5wTWyEAVVh+IT39G4gtyAkh3CtTZs8aX/yRM82OfzHJRg=="],
+    "@types/node": ["@types/node@25.2.3", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-m0jEgYlYz+mDJZ2+F4v8D1AyQb+QzsNqRuI7xg1VQX/KlKS0qT9r1Mo16yo5F/MtifXFgaofIFsdFMox2SxIbQ=="],
 
     "@types/quickjs": ["@types/quickjs@github:Gottox/quickjs-dts#c4bbd81", {}, "Gottox-quickjs-dts-c4bbd81"],
 
@@ -37,7 +37,7 @@
 
     "ret": ["ret@0.1.15", "", {}, "sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg=="],
 
-    "sql-formatter": ["sql-formatter@15.7.0", "", { "dependencies": { "argparse": "^2.0.1", "nearley": "^2.20.1" }, "bin": { "sql-formatter": "bin/sql-formatter-cli.cjs" } }, "sha512-o2yiy7fYXK1HvzA8P6wwj8QSuwG3e/XcpWht/jIxkQX99c0SVPw0OXdLSV9fHASPiYB09HLA0uq8hokGydi/QA=="],
+    "sql-formatter": ["sql-formatter@15.7.1", "", { "dependencies": { "argparse": "^2.0.1", "nearley": "^2.20.1" }, "bin": { "sql-formatter": "bin/sql-formatter-cli.cjs" } }, "sha512-O8h51MnuQAnsInO7is6VoBGeB9wFvXhiTi4AqY5yGWUdF7fNcEDA6F67AAD4OvV4Seb95bPXaAPmnSii/mModg=="],
 
     "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
 
