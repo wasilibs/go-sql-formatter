@@ -1,18 +1,18 @@
 module build
 
-go 1.24.0
+go 1.25.0
 
 require (
 	github.com/goyek/x v0.4.0
-	github.com/wasilibs/tools v0.0.0-20260122051245-ab3579b3018a
+	github.com/wasilibs/tools v0.0.0-20260210015100-7ad8c51cd631
 )
 
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
-	github.com/cli/go-gh/v2 v2.12.2 // indirect
+	github.com/cli/go-gh/v2 v2.13.0 // indirect
 	github.com/cli/safeexec v1.0.1 // indirect
 	github.com/cli/shurcooL-graphql v0.0.4 // indirect
-	github.com/curioswitch/go-build v0.7.1 // indirect
+	github.com/curioswitch/go-build v0.7.2 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/google/go-github/v74 v74.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
