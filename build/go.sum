@@ -52,8 +52,8 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/thlib/go-timezone-local v0.0.6 h1:Ii3QJ4FhosL/+eCZl6Hsdr4DDU4tfevNoV83yAEo2tU=
 github.com/thlib/go-timezone-local v0.0.6/go.mod h1:/Tnicc6m/lsJE0irFMA0LfIwTBo4QP7A8IfyIv4zZKI=
-github.com/wasilibs/tools v0.0.0-20260217010939-3cf6368c13fb h1:5tAwa4PkWt5Kc7xohhMNFUEFnnIl9qU7oRR4+YtXjWQ=
-github.com/wasilibs/tools v0.0.0-20260217010939-3cf6368c13fb/go.mod h1:6fMbnjjzd8di+DgVZ4l8VrFeit/zhhV4lVZt79Y4nxE=
+github.com/wasilibs/tools v0.0.0-20260224074613-f99674ee577f h1:HuNYQ8KUsslfVzmy8McSUxcui6vAGQeavsgyyYH2hdA=
+github.com/wasilibs/tools v0.0.0-20260224074613-f99674ee577f/go.mod h1:6fMbnjjzd8di+DgVZ4l8VrFeit/zhhV4lVZt79Y4nxE=
 golang.org/x/sys v0.0.0-20210831042530-f4d43177bf5e/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.6.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.38.0 h1:3yZWxaJjBmCWXqhN1qh02AkOnCQ1poK6oF+a7xWL6Gc=
