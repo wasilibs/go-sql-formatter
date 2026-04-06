@@ -10,5 +10,5 @@ on:
 
 jobs:
   build:
-    uses: wasilibs/actions/.github/workflows/ci.yaml@77762dfec6f9722d1b57acdfe352dcd16a1dc272
+    uses: wasilibs/actions/.github/workflows/ci.yaml@5bf268fde802fe591d6148e69a7ddb046384d657
     secrets: inherit
